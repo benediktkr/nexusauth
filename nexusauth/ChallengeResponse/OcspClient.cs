@@ -14,7 +14,7 @@ using System.Text;
 using System.Collections;
 using System.Configuration;
 
-
+// Borrowed this file from Sverrir
 // (c) Sverrir Bergþór Sverrirsson
 namespace nexusauth.ChallengeResponse
 {
