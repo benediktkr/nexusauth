@@ -8,7 +8,7 @@ The OcspClient requires BouncyCastle. Installing with NuGet
     PM> Install-Package BouncyCastle
 
 
-You will also need IISExpress, since Nexus Personal requires HTTPS, wich Cassini cannot do. Then go to the "Web" tab in Project Settings and check "Use IIS Express". The select your project in the Solution Explorer and set "SSL Enabled" to True in the Properties tab. This example project includes these settings. 
+You will also need IISExpress, since Nexus Personal requires HTTPS, wich Cassini cannot do. Then go to the "Web" tab in Project Settings and check "Use IIS Express". The select your project in the Solution Explorer and set "SSL Enabled" to True in the Properties tab. This example project includes these settings.
 
 Introduction
 ====
@@ -16,6 +16,17 @@ Introduction
 Some short example-code on how to use the Nexus Personal Authentication Plugin with the certificates from Auðkenni and .NET MVC. 
 
 Nexus Personal provides both a NPAPI browser plugin for "Mozilla-based" browsers and a ActiveX component for MSIE.
+
+The code
+-----
+
+If you just want to get to the meat of things and see the code, they are in the following files
+
+ * `nexusauth/ChallangeResponse/Challenge.cs` - Generating a cryptographically secure challenge
+ * `nexusauth/ChallengeResponse/Response.cs` - Verifying the signature
+ * `nexuauth/Views/Home/Login.cshtml` - JavaScript, talking to the Nexus plugin
+ * `nexuauth/Controllers/HomeController.cs` - Using the Challange-Response and doing OCSP checks. 
+
 
 The process - how it works
 -----
