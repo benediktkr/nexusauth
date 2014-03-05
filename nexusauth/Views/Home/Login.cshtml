@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "Login";
+}
+
+<script type="text/javascript" src="~/Scripts/jquery-1.11.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+        var authentication = document.getElementById("authentication");
+        if (authentication == null) {
+            $("#error").text("Plugin missing");
+            return;
+        }
+        console.log("Challenge: @Model.challenge64");
+        authentication.SetParam('Challenge', '@Model.challenge64');
+        authentication.SetParam('ServerTime', '@Model.servertime');
+
+        console.log("Triggering authenticate");
+
+        var res = authentication.PerformAction('Authenticate');
+        if (res == 0) {
+            var signature = authentication.GetParam('Signature');
+            $.post("/Home/Verify", { xml: signature }, function (response) {
+                console.log(response);
+                if (response.error) {
+                    $("#result").text(response.error);
+                }
+                else {
+                    $("#result").text(response.msg);
+
+                }
+            }, "json");
+        }
+        else if (res == 8002) { 
+            console.log("User cancel");
+            $("#result").text("User cancel");
+        }
+        else if (res == 8015) {
+            console.log("HTTPS required");
+            $("#result").text("HTTPS required");
+        }
+        else {
+            console.error("Error code: " + res.toString());
+            $("#result").text("Error code: " + res.toString());
+        }
+    });
+</script>
+
+<h2>Login demo</h2>
+<div id="result"></div>
+
+
+@{
+    if (Request.Browser.ActiveXControls == true || Request.UserAgent.Contains("rv:11.0"))
+    {
+       <div style="display:none"><object id="authentication" classid="CLSID:DD137900-E4D7-4b86-92CC-2E968F846047" width="0" height="0"></object></div>
+    }
+    else
+    {
+      <div style="display:block"><object id="authentication" type="application/x-personal-authentication" width="0" height="0"></object></div>
+    }
+}
