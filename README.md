@@ -37,7 +37,7 @@ The certificates required to build the chain are included in this repository, bu
 Authors
 ===
 
-Sverrir Bergþór Sverrirsson
-Benedikt Kristinsson
+ * Sverrir Bergþór Sverrirsson
+ * Benedikt Kristinsson
 
 (c) Auðkenni ehf.
