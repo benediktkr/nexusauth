@@ -13,7 +13,6 @@ namespace nexusauth.ChallengeResponse
     public class Response
     {
         // This class uses the .NET primitives for X509 (System.Security.Cryptography.X509Certificates)
-
         public byte[] Certificate;
         public X509Certificate2 X509Certificate;
         public string Nonce;
