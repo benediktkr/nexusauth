@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Text;
+using System.Security.Cryptography;
 
 namespace nexusauth.ChallengeResponse
 {
@@ -22,9 +23,12 @@ namespace nexusauth.ChallengeResponse
 
         public byte[] GetRandomBytes(int n)
         {
-            byte[] rnd = new byte[n];
-            Random rng = new Random();
-            rng.NextBytes(rnd);
+
+            byte [] rnd = new byte[n];
+            using (RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider())
+            {
+                rng.GetBytes(rnd);
+            }
             return rnd;
         }
     }
